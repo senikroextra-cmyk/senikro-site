@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENIKRO TRAINING CENTRE</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        /* Core Theme Colors */
+        :root {
+            --primary: #ff6600;
+            --primary-glow: rgba(255, 102, 0, 0.6);
+            --bg-dark: #0a0a0a;
+            --card-bg: rgba(26, 26, 26, 0.8);
+            --text-light: #ffffff;
+            --text-gray: #cccccc;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Moving Animated Background Shapes */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        .shape1 { width: 500px; height: 500px; background: #ff4500; top: -10%; left: -10%; animation: float1 15s infinite alternate ease-in-out; }
+        .shape2 { width: 400px; height: 400px; background: #cc5200; bottom: -10%; right: -5%; animation: float2 12s infinite alternate ease-in-out; }
+        .shape3 { width: 300px; height: 300px; background: #ff8c00; top: 40%; left: 50%; animation: float3 20s infinite alternate ease-in-out; }
+
+        @keyframes float1 { 100% { transform: translate(150px, 100px) scale(1.2); } }
+        @keyframes float2 { 100% { transform: translate(-150px, -100px) scale(1.3); } }
+        @keyframes float3 { 100% { transform: translate(-100px, 150px) scale(1.1); } }
+
+        /* Scroll Reveal Animation Classes */
+        .scroll-reveal { opacity: 0; transform: translateY(60px); transition: all 0.8s ease-out; }
+        .scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Header & Navigation Menu */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area h1 {
+            color: var(--primary);
+            font-size: 28px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .logo-area span { color: var(--text-light); font-size: 14px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            margin-left: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 10%;
+            min-height: 60vh;
+        }
+
+        .hero-text { flex: 1; }
+        .hero-text h2 { font-size: 55px; margin-bottom: 20px; line-height: 1.2; }
+        .hero-text h2 span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
+        .hero-text p {
+            color: var(--text-gray);
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 550px;
+            line-height: 1.6;
+        }
+
+        /* Hero Social Buttons */
+        .hero-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-btn {
+            text-decoration: none;
+            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+        }
+        .social-btn:hover {
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: translateY(-3px);
+        }
+
+        .hero-image { flex: 1; display: flex; justify-content: flex-end; }
+        
+        .image-placeholder {
+            width: 380px; height: 480px;
+            border: 3px dashed var(--primary);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-weight: bold; text-align: center;
+            padding: 20px; background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(5px); box-shadow: 0 15px 40px rgba(255, 102, 0, 0.2);
+        }
+
+        /* Branch Selection */
+        .section-title {
+            text-align: center; font-size: 35px; margin: 60px 0 30px 0;
+            color: var(--primary); text-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .branch-container {
+            display: flex; justify-content: center; gap: 30px; padding: 20px; flex-wrap: wrap;
+        }
+
+        .branch-card {
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            border: 2px solid #444; padding: 40px 60px; border-radius: 30px;
+            font-size: 26px; font-weight: bold; cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-transform: uppercase; letter-spacing: 1px; min-width: 250px; text-align: center;
+        }
+        .branch-card:hover {
+            background: var(--primary); border-color: var(--text-light);
+            transform: translateY(-10px) scale(1.05); box-shadow: 0 15px 30px rgba(255, 102, 0, 0.5);
+        }
+
+        /* Modals */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px); z-index: 999;
+            justify-content: center; align-items: center;
+        }
+        @keyframes modalPop { 0% { opacity: 0; transform: scale(0.7) translateY(50px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+
+        .modal-content {
+            background: rgba(20, 20, 20, 0.85); border: 1px solid rgba(255, 102, 0, 0.3);
+            box-shadow: 0 0 40px rgba(255, 102, 0, 0.2); padding: 40px; border-radius: 25px;
+            width: 90%; max-width: 850px; text-align: center; position: relative;
+            animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; overflow-y: auto;
+        }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 30px; color: var(--text-gray); cursor: pointer; transition: 0.3s; }
+        .close-btn:hover { color: var(--primary); transform: rotate(90deg); }
+
+        .branch-title-modal { color: var(--primary); font-size: 28px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+
+        #modal-days { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 30px; }
+        .day-btn {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-light); border: 1px solid var(--primary);
+            padding: 12px 35px; border-radius: 25px; cursor: pointer; font-size: 18px; transition: 0.3s;
+        }
+        .day-btn:hover, .day-btn.active { background: var(--primary); box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-3px); }
+
+        #modal-courses { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+
+        /* Course Box & WhatsApp Button */
+        .course-box {
+            background: rgba(0, 0, 0, 0.6); border: 1px solid #333; border-top: 5px solid var(--primary);
+            padding: 25px; border-radius: 20px; width: 320px; text-align: left; transition: 0.4s;
+            animation: modalPop 0.4s ease forwards; opacity: 0; display: flex; flex-direction: column;
+        }
+        .course-box:hover {
+            transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 10px 25px rgba(255, 102, 0, 0.2);
+        }
+        .course-box h3 { color: var(--primary); font-size: 20px; margin-bottom: 12px; }
+        .course-box p { color: var(--text-gray); font-size: 15px; margin-bottom: 8px; flex-grow: 1; }
+        
+        .wa-btn {
+            display: inline-block; margin-top: 15px; background: var(--whatsapp); color: #fff;
+            text-decoration: none; padding: 10px 15px; border-radius: 20px; font-weight: bold;
+            font-size: 14px; text-align: center; transition: 0.3s; border: none; cursor: pointer;
+        }
+        .wa-btn:hover { background: #1ebe57; transform: scale(1.05); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
+
+        /* Info Buttons Area */
+        .info-buttons { display: flex; justify-content: center; gap: 25px; margin: 80px 0; }
+        .btn {
+            background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(5px); color: var(--text-light);
+            padding: 18px 40px; border: 2px solid var(--primary); border-radius: 40px; font-size: 18px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .btn:hover { background: var(--primary); box-shadow: 0 0 20px var(--primary-glow); transform: scale(1.05); }
+
+        /* Media Section */
+        .media-gallery { display: flex; justify-content: center; gap: 25px; padding: 20px 10%; flex-wrap: wrap; margin-bottom: 80px; }
+        .media-box {
+            width: 300px; height: 200px; background: rgba(255, 255, 255, 0.03); border-radius: 20px;
+            display: flex; justify-content: center; align-items: center; color: #666; border: 1px solid #333;
+            backdrop-filter: blur(5px); transition: 0.4s;
+        }
+        .media-box:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-10px) scale(1.02); box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2); }
+
+        /* --- Footer Section (Inspired by screenshot) --- */
+        .site-footer {
+            background: #050505;
+            border-top: 1px solid #333;
+            padding: 60px 10% 20px 10%;
+            margin-top: 50px;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+        .footer-col h3 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        .footer-col h3 span { color: #fff; }
+        .footer-col p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a {
+            text-decoration: none;
+            color: var(--text-gray);
+            transition: 0.3s;
+        }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 5px; }
+        
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #777;
+            font-size: 14px;
+        }
+        .developer-tag {
+            color: var(--primary);
+            font-weight: bold;
+        }
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    /* Header layout for mobile */
+    header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-links a {
+        margin-left: 0;
+        font-size: 14px;
+    }
+
+    /* Hero section adjustments */
+    .hero {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero-text h2 {
+        font-size: 32px !important;
+    }
+
+    .hero-text p {
+        font-size: 15px !important;
+        margin: 0 auto 20px auto;
+    }
+
+    .hero-social {
+        justify-content: center;
+    }
+
+    .hero-image {
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .image-placeholder, .hero-image img {
+        width: 100% !important;
+        max-width: 320px;
+        height: 400px !important;
+    }
+
+    /* Branch cards adjustment */
+    .branch-card {
+        padding: 25px 30px;
+        font-size: 20px;
+        min-width: 100%;
+    }
+
+    /* Modals adjustment for mobile */
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .course-box {
+        width: 100% !important;
+    }
+
+    /* Footer adjustments */
+    .site-footer {
+        padding: 40px 20px 20px 20px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+/* Gallery Styles & Lightbox Overlay */
+.gallery-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 10%;
+}
+
+.gallery-item {
+    width: 280px;
+    height: 180px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #333;
+    transition: 0.4s;
+    position: relative;
+}
+
+.gallery-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 102, 0, 0.4);
+}
+
+.gallery-item img, .gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lightbox Modal with Blur Background */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-content-wrapper {
+    position: relative;
+    max-width: 85%;
+    max-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox-img, .lightbox-video {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 15px;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 30px rgba(255, 102, 0, 0.5);
+}
+
+/* Lightbox Nav Arrows */
+.lightbox-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 102, 0, 0.8);
+    color: white;
+    border: none;
+    font-size: 30px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.lightbox-btn:hover {
+    background: var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+}
+
+.lightbox-prev { left: -60px; }
+.lightbox-next { right: -60px; }
+
+.lightbox-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+
+    <div class="bg-shape shape1"></div>
+    <div class="bg-shape shape2"></div>
+    <div class="bg-shape shape3"></div>
+
+    <header>
+    <div class="logo-area" style="display: flex; align-items: center; gap: 15px;">
+        <!-- මෙන්න මේ img ටැග් එක අලුතෙන් දාන්න -->
+        <img src="logo.png" alt="Logo" style="height: 40px; width: auto; object-fit: contain;">
+        
+        <div>
+            <h1>SENIKRO <span>TRAINING CENTRE</span></h1>
+        </div>
+    </div>
+    <nav class="nav-links">
+        <a href="#branches">Branches & Courses</a>
+        <a href="#info-section">About Sir & Bank</a>
+        <a href="#gallery">Gallery</a>
+    </nav>
+</header>
+
+    <section class="hero scroll-reveal">
+        <div class="hero-text">
+            <h2>Master Your <br><span>English Skills</span> With Us!</h2>
+            <p>Welcome to SENIKRO Training Centre. We specialize in spoken English and language skill development for kids, teens, and professionals. Experience the best interactive learning environment.</p>
+            
+            <!-- Social Buttons Moved Here -->
+            <div class="hero-social">
+                <a href="https://web.facebook.com/senikro/about" target="_blank" class="social-btn">Facebook</a>
+                <a href="https://youtube.com/@senikrotrainingcentre?si=z7zGYhD3R4I3JedO" target="_blank" class="social-btn">YouTube</a>
+            </div>
+        </div>
+        <div class="hero-image">
+    <img src="sir-01.png" alt="Sir Image" style="width: 380px; height: 480px; object-fit: cover; border-radius: 20px; border: 2px solid #ff6600; box-shadow: 0 15px 40px rgba(255, 102, 0, 0.3);">
+</div>
+    </section>
+
+    <!-- Added ID for Smooth Scrolling -->
+    <div id="branches">
+        <h2 class="section-title scroll-reveal">Select Your Nearest Branch</h2>
+        <div class="branch-container scroll-reveal">
+            <div class="branch-card" onclick="openScheduleModal('Kandana')">Kandana</div>
+            <div class="branch-card" onclick="openScheduleModal('Thalawathugoda')">Thalawathugoda</div>
+            <div class="branch-card" onclick="openScheduleModal('Awissawella')">Awissawella</div>
+        </div>
+    </div>
+
+    <!-- Added ID for Smooth Scrolling -->
+    <div class="info-buttons scroll-reveal" id="info-section">
+        <button class="btn" onclick="openModal('teacherModal')">About Our Master</button>
+        <button class="btn" onclick="openModal('bankModal')">Bank Details & Branches</button>
+    </div>
+
+    <!-- Gallery & Media Section -->
+<div id="gallery">
+    <h2 class="section-title scroll-reveal">Gallery & Media</h2>
+    <div class="gallery-grid scroll-reveal">
+        <!-- Photo 1 -->
+        <div class="gallery-item" onclick="openLightbox(0)">
+            <img src="photo1.jpeg" alt="Gallery Photo 1">
+        </div>
+        <!-- Photo 2 -->
+        <div class="gallery-item" onclick="openLightbox(1)">
+            <img src="photo2.jpeg" alt="Gallery Photo 2">
+        </div>
+ <!-- Photo 3 -->
+        <div class="gallery-item" onclick="openLightbox(1)">
+            <img src="photo3.png" alt="Gallery Photo 2">
+        </div>
+        <!-- Video 1 -->
+        <div class="gallery-item" onclick="openLightbox(2)">
+            <video src="video1.mp4" muted></video>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox Pop-up Modal -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content-wrapper">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-btn lightbox-prev" onclick="changeMedia(-1)">&#10094;</button>
+        <div id="lightbox-media-container"></div>
+        <button class="lightbox-btn lightbox-next" onclick="changeMedia(1)">&#10095;</button>
+    </div>
+</div>
+
+    <!-- Main Schedule Modal -->
+    <div class="modal" id="scheduleModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2 class="branch-title-modal" id="modalBranchTitle">Branch Name</h2>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Select a day to view available classes.</p>
+            <div id="modal-days"></div>
+            <div id="modal-courses"></div>
+        </div>
+    </div>
+
+    <!-- Teacher Modal -->
+    <div class="modal" id="teacherModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('teacherModal')">&times;</span>
+            <h2 class="branch-title-modal">About The Master</h2>
+            <p style="color: var(--text-gray); line-height: 1.8; font-size: 18px;">
+                Meet our expert English instructor with years of experience in Toastmasters, IELTS, and English Literature. 
+                He has transformed thousands of students into confident public speakers! <br><br>
+                <strong>Chundika Ariyawansa is a highly qualified and versatile professional dedicated to human resource development, training, and holistic well-being. Serving as our Chief Resource Person, he brings a wealth of expertise spanning management, professional communication, and psychological counseling.
+
+With a solid academic and professional foundation, Mr. Ariyawansa holds an MBA (PIM) and is a recognized member of several prestigious institutes, including AMCIPM, AMIBSL, and MAAT.
+
+As a Certified Trainer (City & Guild - UK) and a Distinguished Toastmaster (DTM - USA), he is an expert in public speaking, leadership development, and corporate training. Beyond professional coaching, he is also a passionate advocate for mental and physical wellness, qualified as a Psychological Counsellor and a Yoga Shiromani, alongside holding a Dip in English (SJVC).
+
+With his multi-disciplinary approach, he continues to empower individuals and organizations to achieve peak performance and mindfulness.</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Bank Details Modal -->
+    <div class="modal" id="bankModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('bankModal')">&times;</span>
+            <h2 class="branch-title-modal">Bank Details & Contact</h2>
+            <div style="color: var(--text-gray); text-align: left; line-height: 2; font-size: 18px; background: rgba(0,0,0,0.4); padding: 30px; border-radius: 15px;">
+                <p><strong>Bank Name:</strong> Sampath Bank</p>
+                <p><strong>Account Name:</strong> Senikro Training Centre</p>
+                <p><strong>Account No:</strong> 002011003068</p>
+                <p><strong>Branch:</strong> Eheliyagoda</p>
+                <hr style="border-color: #444; margin: 20px 0;">
+                <p>📍 <strong>Kandana Branch:</strong> 23 Church Rd, Kandana 11320</p>
+                <p>📍 <strong>Thalawathugoda:</strong> No.290U Salinda dissanayaka Mw,Ruhunupura 10116</p>
+                <p>📍 <strong>Awissawella:</strong> Highlevel Road, Awissawella.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW PROFESSIONAL FOOTER -->
+    <footer class="site-footer scroll-reveal">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>SENIKRO <span>TRAINING CENTRE</span></h3>
+                <p>Your trusted partner for all spoken English and language development needs in Sri Lanka, providing quality education and an exceptional learning environment.</p>
+            </div>
+            <div class="footer-col">
+                <h3 style="color: #fff;">Quick Links</h3>
+                <ul>
+                    <li><a href="#branches">Branches & Courses</a></li>
+                    <li><a href="#info-section">About The Master</a></li>
+                    <li><a href="#info-section">Bank Details</a></li>
+                    <li><a href="#gallery">Media Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 style="color: #fff;">Contact Us</h3>
+                <p>📍 <strong>Main Branch:</strong> 23 Church Rd, Kandana 11320</p>
+                <p>📞 <strong>Phone:</strong> 071 418 7300 / 071 475 6319</p>
+                <p>📧 <strong>Email:</strong> senikrotrainingcentre@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SENIKRO TRAINING CENTRE. All Rights Reserved.</p>
+            <p>Designed & Developed by <span class="developer-tag">THENUKZ</span></p>
+        </div>
+    </footer>
+
+    <script>
+        const scheduleData = {
+            "Kandana": {
+                "Monday": [
+                    { title: "Spoken English", time: "10:00 AM - 12:00 PM", target: "Open to all" },
+                    { title: "English Language Skill Dev.", time: "2:30 PM - 4:30 PM", target: "Age 7-10" },
+                    { title: "Public Speaking (Advanced)", time: "4:30 PM - 6:30 PM", target: "Age 10-16" },
+                    { title: "Public Speaking for Adults", time: "6:30 PM - 8:30 PM", target: "Age 18+" }
+                ],
+                "Thursday": [
+                    { title: "English Language Skill Dev.", time: "2:30 PM - 4:30 PM", target: "Age 7-10" },
+                    { title: "Public Speaking (Basic)", time: "4:30 PM - 6:30 PM", target: "Age 8-16" },
+                    { title: "Public Speaking for Adults", time: "6:30 PM - 8:30 PM", target: "Age 18+" }
+                ]
+            },
+            "Thalawathugoda": {
+                "Wednesday": [
+                    { title: "O/L English Literature", time: "4:00 PM - 6:00 PM", target: "Age 14-16" },
+                    { title: "Smart Presenter", time: "6:00 PM - 8:00 PM", target: "Adults" }
+                ],
+                "Saturday": [
+                    { title: "Kids Playshop", time: "8:00 AM - 10:00 AM", target: "Age 6-8" },
+                    { title: "English Literature for Kids", time: "10:00 AM - 12:00 PM", target: "Age 9-12" },
+                    { title: "O/L English Literature", time: "1:30 PM - 3:30 PM", target: "Age 14-16" },
+                    { title: "Toastmaster Program", time: "3:30 PM - 5:30 PM", target: "Age 9-17" },
+                    { title: "Smart Presenter", time: "6:00 PM - 8:00 PM", target: "Adults" }
+                ]
+            },
+            "Awissawella": {
+                "Tuesday": [
+                    { title: "Adults Spoken English", time: "10:00 AM - 12:00 PM", target: "Age 18+ (03 Months)" },
+                    { title: "English for Kids", time: "1:00 PM - 3:00 PM", target: "Age 6-7" },
+                    { title: "A/L General English", time: "3:30 PM - 5:30 PM", target: "A/L Students" },
+                    { title: "English Language", time: "5:30 PM - 7:30 PM", target: "Age 12-14" }
+                ],
+                "Friday": [
+                    { title: "Adults Spoken English", time: "10:00 AM - 12:00 PM", target: "Age 18+ (03 Months)" },
+                    { title: "English for Kids", time: "3:30 PM - 5:30 PM", target: "Age 10-12" },
+                    { title: "O/L General English", time: "3:30 PM - 5:30 PM", target: "Age 16-17" }
+                ],
+                "Sunday": [
+                    { title: "Public Speaking with Toastmaster", time: "6:00 PM - 8:00 PM", target: "Age 8-16" }
+                ]
+            }
+        };
+
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); } 
+                else { entry.target.classList.remove('active'); }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.scroll-reveal').forEach((el) => { observer.observe(el); });
+
+        function openScheduleModal(branch) {
+            document.getElementById('modalBranchTitle').innerText = branch + " Branch";
+            const daysContainer = document.getElementById('modal-days');
+            const coursesContainer = document.getElementById('modal-courses');
+            
+            daysContainer.innerHTML = ''; coursesContainer.innerHTML = '';
+
+            const branchDays = Object.keys(scheduleData[branch]);
+            branchDays.forEach(day => {
+                const btn = document.createElement('button');
+                btn.className = 'day-btn'; btn.innerText = day;
+                btn.onclick = () => loadCoursesInModal(branch, day, btn);
+                daysContainer.appendChild(btn);
+            });
+
+            openModal('scheduleModal');
+        }
+
+        // WhatsApp Integration Here
+        const myWhatsappNumber = "94779577872"; // මෙතනට ඔයාලගේ WhatsApp Number එක දාන්න (94 න් පටන්ගන්න)
+
+        function loadCoursesInModal(branch, day, element) {
+            document.querySelectorAll('#modal-days .day-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            const coursesContainer = document.getElementById('modal-courses');
+            coursesContainer.innerHTML = '';
+
+            const courses = scheduleData[branch][day];
+
+            courses.forEach((course, index) => {
+                const box = document.createElement('div');
+                box.className = 'course-box';
+                box.style.animationDelay = `${index * 0.1}s`;
+
+                // Auto generate WhatsApp message
+                const textMessage = `Hi SENIKRO! I want to join the "${course.title}" class on ${day} at the ${branch} branch.`;
+                const whatsappLink = `https://wa.me/${94779577872}?text=${encodeURIComponent(textMessage)}`;
+
+                box.innerHTML = `
+                    <h3>${course.title}</h3>
+                    <p>🕒 <strong>Time:</strong> ${course.time}</p>
+                    <p>🎯 <strong>Target:</strong> ${course.target}</p>
+                    <a href="${whatsappLink}" target="_blank" class="wa-btn">💬 Send WhatsApp Msg</a>
+                `;
+                coursesContainer.appendChild(box);
+            });
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) { event.target.style.display = "none"; }
+        }
+// Lightbox Gallery Logic
+let currentMediaIndex = 0;
+
+function getMediaItems() {
+    return document.querySelectorAll('.gallery-item img, .gallery-item video');
+}
+
+function openLightbox(index) {
+    currentMediaIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'flex';
+    showMedia(currentMediaIndex);
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.style.display = 'none';
+    document.getElementById('lightbox-media-container').innerHTML = '';
+}
+
+function showMedia(index) {
+    const mediaItems = getMediaItems();
+    if (index >= mediaItems.length) currentMediaIndex = 0;
+    if (index < 0) currentMediaIndex = mediaItems.length - 1;
+
+    const selectedMedia = mediaItems[currentMediaIndex];
+    const container = document.getElementById('lightbox-media-container');
+    container.innerHTML = '';
+
+    if (selectedMedia.tagName === 'IMG') {
+        const img = document.createElement('img');
+        img.src = selectedMedia.src;
+        img.className = 'lightbox-img';
+        container.appendChild(img);
+    } else if (selectedMedia.tagName === 'VIDEO') {
+        const video = document.createElement('video');
+        video.src = selectedMedia.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.className = 'lightbox-video';
+        container.appendChild(video);
+    }
+}
+
+function changeMedia(direction) {
+    currentMediaIndex += direction;
+    showMedia(currentMediaIndex);
+}
+
+// Keyboard Arrow Navigation Setup
+document.addEventListener('keydown', function(event) {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox.style.display === 'flex') {
+        if (event.key === 'ArrowRight') {
+            changeMedia(1); // Right Arrow -> Next
+        } else if (event.key === 'ArrowLeft') {
+            changeMedia(-1); // Left Arrow -> Prev
+        } else if (event.key === 'Escape') {
+            closeLightbox(); // ESC Key -> Close
+        }
+    }
+});
+    </script>
+</body>
+</html>
